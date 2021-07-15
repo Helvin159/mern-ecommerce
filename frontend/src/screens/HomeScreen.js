@@ -1,9 +1,25 @@
-import React from "react";
-import products from "../products";
-import Product from "../components/Product.js";
+import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
+import axios from "axios";
+import Product from "../components/Product.js";
 
 const HomeScreen = () => {
+	const [
+		products,
+		setProducts,
+	] = useState([]);
+
+	useEffect(() => {
+		const fetchProducts = async () => {
+			const { data } = await axios.get("/api/products");
+			setProducts(data);
+		};
+
+		fetchProducts();
+
+		// eslint-disable-next-line
+	}, []);
+
 	return (
 		<div>
 			<h1 className='py-3'>Latest Products</h1>
