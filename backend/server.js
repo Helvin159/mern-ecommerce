@@ -1,5 +1,14 @@
-const express = require("express");
-const products = require("./data/products");
+import express from "express";
+import productRoutes from "./routes/productRoute.js";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
+import colors from "colors";
+
+dotenv.config();
+
+// Connect to database
+connectDB();
 
 const app = express();
 
@@ -7,17 +16,17 @@ app.get("/", (req, res) => {
 	res.send("api is running");
 });
 
-app.get("/api/products", (req, res) => {
-	res.json(products);
-});
+app.use("/api/products", productRoutes);
 
-app.get("/api/products/:id", (req, res) => {
-	const param = req.params.id;
-	// console.log(res, param);
+app.use(notFound);
 
-	const product = products.find((p) => p._id === param);
-	res.json(product);
-	console.log(product);
-});
+app.use(errorHandler);
 
-app.listen(5000, console.log("server running on port 5000"));
+const PORT = process.env.PORT || 5000;
+
+app.listen(
+	PORT,
+	console.log(
+		`server running ${process.env.NODE_ENV} mode on ${PORT}`.blue.bold
+	)
+);

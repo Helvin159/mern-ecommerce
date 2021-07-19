@@ -11,17 +11,20 @@ const ProductScreen = ({ match }) => {
 		setProduct,
 	] = useState({});
 
-	useEffect(() => {
-		const fetchProduct = async () => {
-			const { data } = await axios.get(`/api/products/${match.params.id}`);
-			console.log(data);
-			setProduct(data);
-		};
+	useEffect(
+		() => {
+			const fetchProduct = async () => {
+				const { data } = await axios.get(`/api/products/${match.params.id}`);
+				console.log(data);
+				setProduct(data);
+			};
 
-		fetchProduct();
-
-		// eslint-disable-next-line
-	}, []);
+			fetchProduct();
+		},
+		[
+			match,
+		]
+	);
 
 	return (
 		<div>
