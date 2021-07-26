@@ -9,3 +9,13 @@ h3 {
 .rating span {
 	margin: .1rem;
 }
+
+h1 {
+	padding: 1rem 0;
+	font-size: 1.8rem;
+}
+
+h2 {
+	padding: .5rem 0;
+	font-size: 1.4rem;
+}

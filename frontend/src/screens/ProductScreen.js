@@ -19,7 +19,7 @@ const ProductScreen = ({ history, match }) => {
 	const [
 		qty,
 		setQty,
-	] = useState(0);
+	] = useState(1);
 
 	const dispatch = useDispatch();
 
