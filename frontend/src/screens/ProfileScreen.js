@@ -6,6 +6,7 @@ import Message from "../components/Message";
 import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userActions";
 import { listMyOrders } from "../actions/orderActions";
+import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 
 const ProfileScreen = ({ location, history }) => {
 	const [
@@ -53,6 +54,7 @@ const ProfileScreen = ({ location, history }) => {
 			}
 			else {
 				if (!user.name) {
+					dispatch({ type: USER_UPDATE_PROFILE_RESET });
 					dispatch(getUserDetails("profile"));
 					dispatch(listMyOrders());
 				}
@@ -67,6 +69,7 @@ const ProfileScreen = ({ location, history }) => {
 			history,
 			userInfo,
 			user,
+			success,
 		]
 	);
 
